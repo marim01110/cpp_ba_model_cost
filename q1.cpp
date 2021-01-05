@@ -17,6 +17,12 @@ static int node_count=0;
 
 void q1(){
     ba_init();
+
+    for(int i=node_count;i<NODES;i++){
+
+        node_count+=1;
+    }
+
     print_list();
 }
 
@@ -44,6 +50,10 @@ void node_connection(int node_num, int node_connect){
     node[node_connect].connect[top].next_node=node_num;
     node[node_connect].connect[top].cost=DEFAULT_COST;
     node[node_connect].connected_nodes+=1;
+}
+
+int define_connect_node(){
+    
 }
 
 void print_list(){

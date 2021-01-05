@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <random>
 
 #define NODES 10
 #define DEFAULT_COST 1
