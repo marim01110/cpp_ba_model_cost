@@ -6,4 +6,4 @@
 
 void ba_init();
 void node_put();
-void node_connection(int node_num)
+void node_connection(int node_num);
