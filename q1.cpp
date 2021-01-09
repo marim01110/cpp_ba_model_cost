@@ -1,5 +1,6 @@
 #include "func_h.h"
 //#define Debug
+#define DEFAULT_COST 1
 using namespace std;
 
 typedef struct connect_t{
@@ -86,14 +87,14 @@ int define_connect_node(){
 }
 
 void print_list(){
-    cout << "Total: " << node_count << "." << endl;
+    cout << "Total: " << node_count << " nodes" << endl;
     for(int i=0;i<node_count;i++){
         int top=node[i].connected_nodes;
-        cout << "Node_num:" << i << ", Connected_node_num: ";
+        cout << "Node_num:" << i << ", Total connected nodes: " << top << ", Connected_node_num: ";
         for(int j=0;j<top;j++){
-            cout << node[i].connect[j].next_node << ",";
+            if(j!=top-1)cout << node[i].connect[j].next_node << ",";
+            else cout << node[i].connect[j].next_node << endl;
         }
-        cout << endl;
     }
     cout << endl;
-}//Checked 2021.01.09 17.31
+}//Checked 2021.01.09 18.18

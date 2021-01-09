@@ -3,7 +3,6 @@
 #include <random>
 
 #define NODES 100
-#define DEFAULT_COST 1
 
 void ba_init();
 void node_put();
