@@ -48,7 +48,10 @@ void q1(){
             cout << endl;
             break;
         }
+        dijkstra_position_update(&from);
     }while(true);
+
+    print_cost_list();
 }
 
 void ba_init(){
@@ -166,3 +169,10 @@ void dijkstra_position_update(int* from){
         }
     }
 }//checked 2021.01.09 21.29
+
+void print_cost_list(){
+    for(int i=0;i<NODES;i++){
+        cout << "Node_num:" << i << ", Cost: " << cost_array[i] << endl;
+    }
+    cout << endl;
+}//checked 2021.01.09 21.37

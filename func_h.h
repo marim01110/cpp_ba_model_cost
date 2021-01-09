@@ -19,3 +19,5 @@ int decide_start_node();
 
 void dijkstra_init(int input, int* x);
 void find_node(int from);
+void dijkstra_position_update(int* from);
+void print_cost_list();
