@@ -149,7 +149,7 @@ void dijkstra_init(int input, int* x){
 void find_node(int from){
     int top=node[from].connected_nodes, temp_cost;
     for(int i=0;i<top;i++){
-        temp_cost=DEFAULT_COST;
+        temp_cost=node[from].connect[i].cost;
         if((cost_array[node[from].connect[i].next_node] > cost_array[from] + temp_cost) and (cost_array[node[from].connect[i].next_node] > 0)){
             cost_array[node[from].connect[i].next_node]=cost_array[from]+temp_cost;
             route_array[node[from].connect[i].next_node]=from;

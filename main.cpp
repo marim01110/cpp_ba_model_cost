@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdio.h>
 
-#include "q1.cpp"
 #include "q2.cpp"
 
 using namespace std;
