@@ -18,6 +18,8 @@ _node node[NODES]={};
 static int node_count=0, connect_node_total=0;
 
 void q1(){
+    int start_node;
+
     ba_init();
 
     for(int i=node_count;i<NODES;i++){
@@ -26,8 +28,9 @@ void q1(){
         node_connection(i,define_connect_node());
         node_count+=1;
     }
-
     print_list();
+
+    start_node=decide_start_node();
 }
 
 void ba_init(){
@@ -98,3 +101,10 @@ void print_list(){
     }
     cout << endl;
 }//Checked 2021.01.09 18.18
+
+int decide_start_node(){
+    int node;
+    cout << "スタートノードを設定してください。[0-" << NODES - 1 << "]" << endl;
+    scanf("%d",&node);
+    return node;
+}
