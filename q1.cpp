@@ -5,7 +5,7 @@ using namespace std;
 
 typedef struct connect_t{
     int next_node=-1;
-    int cost;
+    long double cost;
 }_connect;
 
 typedef struct node_t{
@@ -15,8 +15,9 @@ typedef struct node_t{
 }_node;
 
 _node node[NODES]={};
-static int route_array[NODES]={}, node_done[NODES]={}, cost_array[NODES]={};
-static int node_count=0, connect_node_total=0, node_remains=NODES;
+int route_array[NODES]={}, node_done[NODES]={};
+long double cost_array[NODES]={};
+int node_count=0, connect_node_total=0, node_remains=NODES;
 
 void q1(){
     int start_node, from, find_status;
@@ -147,7 +148,8 @@ void dijkstra_init(int input, int* x){
 }//checked 2020.01.03 00.47
 
 void find_node(int from){
-    int top=node[from].connected_nodes, temp_cost;
+    int top=node[from].connected_nodes;
+    long double temp_cost;
     for(int i=0;i<top;i++){
         temp_cost=node[from].connect[i].cost;
         if((cost_array[node[from].connect[i].next_node] > cost_array[from] + temp_cost) and (cost_array[node[from].connect[i].next_node] > 0)){
@@ -162,7 +164,7 @@ void find_node(int from){
 }//Checked 2021.01.09 21.24
 
 void dijkstra_position_update(int* from){
-    int min=INF;
+    long double min=INF;
 
     for(int i=0;i<NODES;i++){
         if((node_done[i] == UNDONE) and (cost_array[i] > 0)){

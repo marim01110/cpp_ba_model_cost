@@ -2,15 +2,19 @@
 //#define Debug
 using namespace std;
 
+static long double cost_candidates[NODES]={};
+
 void q2(){
     int start_node, from, find_status;
 
-    ba_init();
+    gen_normal_distribution();
+
+    ba_init_nd();
 
     for(int i=node_count;i<NODES;i++){
         node_put();
         node_count-=1;
-        node_connection(i,define_connect_node());
+        node_connection_nd(i,define_connect_node());
         node_count+=1;
     }
     print_list();
@@ -42,6 +46,34 @@ void q2(){
     }while(true);
 }
 
+void ba_init_nd(){
+    for(int i=0;i<3;i++){
+        node_put();
+    }
+    node_count=0;
+    node_connection_nd(0,1);
+    node_count+=1;
+    node_connection_nd(0,2);
+    node_count+=1;
+    node_connection_nd(1,2);
+    node_count+=1;
+    connect_node_total=6;
+}
+
+void node_connection_nd(int node_num, int node_connect){
+    int top=node[node_num].connected_nodes;
+    node[node_num].connect[top].next_node=node_connect;
+    node[node_num].connect[top].cost=cost_candidates[node_count];
+    node[node_num].connected_nodes+=1;
+    connect_node_total+=1;
+
+    top=node[node_connect].connected_nodes;
+    node[node_connect].connect[top].next_node=node_num;
+    node[node_connect].connect[top].cost=cost_candidates[node_count];
+    node[node_connect].connected_nodes+=1;
+    connect_node_total+=1;
+}//Checked 2021.01.
+
 void gen_normal_distribution(){
     double avg, sd;
     cout << "正規分布の平均値を入力してください。" << endl;
@@ -53,4 +85,9 @@ void gen_normal_distribution(){
     default_random_engine nd(seed_gen());
     
     normal_distribution<> dist(avg, sd);
+    
+    for(int i=0;i<NODES;i++){
+        cost_candidates[i]=dist(nd);
+        cout << cost_candidates[i] << endl;
+    }
 }
