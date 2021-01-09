@@ -153,3 +153,16 @@ void find_node(int from){
         }
     }
 }//Checked 2021.01.09 21.24
+
+void dijkstra_position_update(int* from){
+    int min=INF;
+
+    for(int i=0;i<NODES;i++){
+        if((node_done[i] == UNDONE) and (cost_array[i] > 0)){
+            if(min > cost_array[i]){
+                min=cost_array[i];
+                *from = i;
+            }
+        }
+    }
+}//checked 2021.01.09 21.29

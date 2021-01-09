@@ -2,12 +2,13 @@
 #include <stdio.h>
 #include <random>
 
+#define INF 99999
 #define NODES 10
 #define DONE 1
 #define UNDONE -1
 #define YES 1
 #define NO -1
-#define HSIZE 100//history array size
+#define HSIZE NODES*10//history array size
 
 void ba_init();
 void node_put();
