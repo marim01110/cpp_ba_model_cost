@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "q1.cpp"
-//#include "q2.cpp"
+#include "q2.cpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main(){
     switch(sel){
         case 1: q1();
                 break;
-        case 2: //q2();
+        case 2: q2();
                 break;
         default:cout << sel << "番の課題はありません。" << endl;
                 break;
