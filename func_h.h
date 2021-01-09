@@ -3,6 +3,11 @@
 #include <random>
 
 #define NODES 100
+#define DONE 1
+#define UNDONE -1
+#define YES 1
+#define NO -1
+#define HSIZE 100//history array size
 
 void ba_init();
 void node_put();
@@ -10,3 +15,5 @@ void node_connection(int node_num, int node_connect);
 int define_connect_node();
 void print_list();
 int decide_start_node();
+
+void dijkstra_init(int input, int* x);

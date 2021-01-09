@@ -15,10 +15,10 @@ typedef struct node_t{
 }_node;
 
 _node node[NODES]={};
-static int node_count=0, connect_node_total=0;
+static int node_count=0, connect_node_total=0, node_done[NODES]={}, cost_array[NODES]={};
 
 void q1(){
-    int start_node;
+    int start_node, from, find_status;
 
     ba_init();
 
@@ -29,8 +29,12 @@ void q1(){
         node_count+=1;
     }
     print_list();
-
+    
+    //search state
     start_node=decide_start_node();
+    dijkstra_init(start_node, &from);
+    cout << "ノード " << from << " から探索を開始します。" << endl;
+    
 }
 
 void ba_init(){
@@ -108,3 +112,15 @@ int decide_start_node(){
     scanf("%d",&node);
     return node;
 }
+
+void dijkstra_init(int input, int* x){
+    //set position to goal node
+    *x=input;
+
+    //array init
+    for(int i=0;i<NODES;i++){
+        cost_array[i]=UNDONE;
+        node_done[i]=UNDONE;
+    }
+    cost_array[input]=0;//set cost of start node to zero
+}//checked 2020.01.03 00.47
