@@ -1,4 +1,5 @@
 #include "func_h.h"
+//#define Debug
 using namespace std;
 
 typedef struct connect_t{
@@ -21,10 +22,7 @@ void q1(){
     for(int i=node_count;i<NODES;i++){
         node_put();
         node_count-=1;
-        define_connect_node();
-
-
-
+        node_connection(i,define_connect_node());
         node_count+=1;
     }
 
@@ -38,7 +36,7 @@ void ba_init(){
     node_connection(0,1);
     node_connection(0,2);
     node_connection(1,2);
-    connect_node_total+=6;
+    connect_node_total=6;
 }//Checked 2021.01.09 17.31
 
 void node_put(){
@@ -72,14 +70,18 @@ int define_connect_node(){
     mt19937 rd{random_device{}()};
     uniform_real_distribution<long double> dist(0, 1);
     rd_temp=dist(rd);
+    #ifdef Debug
+    cout << "init rd_temp: " << rd_temp << endl;
+    #endif
 
     do{
         rd_temp-=priority[node_sel];
         if(rd_temp<=0) break;
         node_sel+=1;
     }while(true);
-
-    cout << node_sel << endl;
+    #ifdef Debug
+    cout << "cur_max_nodes: " << node_count + 1 << ", selected: " << node_sel << endl;
+    #endif
     return node_sel;
 }
 

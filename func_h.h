@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <random>
 
-#define NODES 10
+#define NODES 100
 #define DEFAULT_COST 1
 
 void ba_init();

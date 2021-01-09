@@ -10,6 +10,7 @@ int main(){
     int sel;
     cout << "課題何番を実行しますか？[1/2]" << endl;
     scanf("%d",&sel);
+    cout << endl;
     switch(sel){
         case 1: q1();
                 break;
