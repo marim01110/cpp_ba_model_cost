@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <random>
 
-#define NODES 100
+#define NODES 10
 #define DONE 1
 #define UNDONE -1
 #define YES 1
@@ -17,3 +17,4 @@ void print_list();
 int decide_start_node();
 
 void dijkstra_init(int input, int* x);
+void find_node(int from);

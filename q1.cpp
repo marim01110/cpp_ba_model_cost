@@ -15,7 +15,8 @@ typedef struct node_t{
 }_node;
 
 _node node[NODES]={};
-static int node_count=0, connect_node_total=0, node_done[NODES]={}, cost_array[NODES]={};
+static int route_array[NODES]={}, node_done[NODES]={}, cost_array[NODES]={};
+static int node_count=0, connect_node_total=0, node_remains=NODES;
 
 void q1(){
     int start_node, from, find_status;
@@ -34,7 +35,20 @@ void q1(){
     start_node=decide_start_node();
     dijkstra_init(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
-    
+
+    do{
+        find_node(from);
+        node_done[from]=DONE;
+        node_remains-=1;
+        #ifdef Debug
+        cout << "node_remains: " << node_remains-1 <<endl;
+        #endif
+        if(node_remains==1){
+            cout << "全ノードの経路探索が終了しました。" << endl;
+            cout << endl;
+            break;
+        }
+    }while(true);
 }
 
 void ba_init(){
@@ -91,7 +105,7 @@ int define_connect_node(){
     cout << "cur_max_nodes: " << node_count + 1 << ", selected: " << node_sel << endl;
     #endif
     return node_sel;
-}
+}//Checked 2021.01.09 21.24
 
 void print_list(){
     cout << "Total: " << node_count << " nodes" << endl;
@@ -111,7 +125,7 @@ int decide_start_node(){
     cout << "スタートノードを設定してください。[0-" << NODES - 1 << "]" << endl;
     scanf("%d",&node);
     return node;
-}
+}//Checked 2021.01.09 21.24
 
 void dijkstra_init(int input, int* x){
     //set position to goal node
@@ -124,3 +138,18 @@ void dijkstra_init(int input, int* x){
     }
     cost_array[input]=0;//set cost of start node to zero
 }//checked 2020.01.03 00.47
+
+void find_node(int from){
+    int top=node[from].connected_nodes, temp_cost;
+    for(int i=0;i<top;i++){
+        temp_cost=DEFAULT_COST;
+        if((cost_array[node[from].connect[i].next_node] > cost_array[from] + temp_cost) and (cost_array[node[from].connect[i].next_node] > 0)){
+            cost_array[node[from].connect[i].next_node]=cost_array[from]+temp_cost;
+            route_array[node[from].connect[i].next_node]=from;
+        }
+        if(cost_array[node[from].connect[i].next_node] == UNDONE){
+            cost_array[node[from].connect[i].next_node]=cost_array[from]+temp_cost;
+            route_array[node[from].connect[i].next_node]=from;
+        }
+    }
+}//Checked 2021.01.09 21.24
