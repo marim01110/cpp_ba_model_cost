@@ -52,6 +52,10 @@ void q1(){
     }while(true);
 
     print_cost_list();
+    do{
+        int error=print_route(start_node);
+        if(error!=0) break;
+    }while(true);
 }
 
 void ba_init(){
@@ -176,3 +180,36 @@ void print_cost_list(){
     }
     cout << endl;
 }//checked 2021.01.09 21.37
+
+int print_route(int start){
+    int to, count;
+    int temp[HSIZE]={};
+
+    cout << "目標地点を設定してください。[0-" << NODES-1 << "] 範囲外の地点を入力すると終了します。" << endl;
+    scanf("%d", &to);
+    cout << endl;
+    count=0;
+    if((to >= NODES) or (to < 0)) return -1;
+    else if(to == start){
+        cout << "スタートノードと目標ノードが同一ノードです。" << endl;
+    }
+    else{
+        temp[count]=to;
+        do{
+            count+=1;
+            temp[count]=route_array[temp[count-1]];
+            if(temp[count] == start) break;
+        }while(true);
+
+        cout << start << " から、" << to << " までの最短経路は以下の通りです。" << endl;
+        
+        for(int i=count;i>=0;i--){
+            if(i!=0) cout << temp[i] << " -> ";
+            if(i==0) cout << temp[i] << endl;
+        }
+
+        cout << "また距離（コスト）は、" << cost_array[to] << "です。" << endl;
+    }
+    cout << endl;
+    return 0;
+}

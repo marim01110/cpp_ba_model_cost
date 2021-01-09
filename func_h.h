@@ -3,7 +3,7 @@
 #include <random>
 
 #define INF 99999
-#define NODES 10
+#define NODES 100
 #define DONE 1
 #define UNDONE -1
 #define YES 1
@@ -21,3 +21,4 @@ void dijkstra_init(int input, int* x);
 void find_node(int from);
 void dijkstra_position_update(int* from);
 void print_cost_list();
+int print_route(int start);
