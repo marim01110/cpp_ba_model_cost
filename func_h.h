@@ -9,8 +9,6 @@
 #define YES 1
 #define NO -1
 #define HSIZE NODES*10//history array size
-#define UNUSED 0
-#define USED 1
 
 //Create Network
 void ba_init();
