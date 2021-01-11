@@ -131,7 +131,7 @@ void print_list(){
 int decide_start_node(){
     int node;
     cout << "スタートノードを設定してください。[0-" << NODES - 1 << "]" << endl;
-    scanf("%d",&node);
+    cin >> node;
     return node;
 }//Checked 2021.01.09 21.24
 
@@ -188,7 +188,7 @@ int print_route(int start){
     int temp[HSIZE]={};
 
     cout << "目標地点を設定してください。[0-" << NODES-1 << "] 範囲外の地点を入力すると終了します。" << endl;
-    scanf("%d", &to);
+    cin >> to;
     cout << endl;
     count=0;
     if((to >= NODES) or (to < 0)) return -1;

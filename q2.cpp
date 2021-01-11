@@ -21,9 +21,9 @@ void q2(){
     
     //search state
     start_node=decide_start_node();
-    dijkstra_init(start_node, &from);
+    //dijkstra_init(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
-
+/*
     do{
         find_node(from);
         node_done[from]=DONE;
@@ -38,7 +38,7 @@ void q2(){
         }
         dijkstra_position_update(&from);
     }while(true);
-
+*/
     print_cost_list();
     do{
         int error=print_route(start_node);
@@ -77,9 +77,9 @@ void node_connection_nd(int node_num, int node_connect){
 void gen_normal_distribution(){
     double avg, sd;
     cout << "正規分布の平均値を入力してください。" << endl;
-    scanf("%lf",&avg);
+    cin >> avg;
     cout << "正規分布の標準偏差を入力してください。" << endl;
-    scanf("%lf",&sd);
+    cin >> sd;
 
     random_device seed_gen;
     default_random_engine nd(seed_gen());
