@@ -2,7 +2,7 @@
 //#define Debug
 using namespace std;
 
-static long double cost_candidates[NODES]={};
+static double cost_candidates[NODES]={};
 
 void q2(){
     int start_node, from, find_status;
@@ -58,7 +58,7 @@ void ba_init_nd(){
     node_connection_nd(1,2);
     node_count+=1;
     connect_node_total=6;
-}
+}//Checked 2021.01.11 17.34
 
 void node_connection_nd(int node_num, int node_connect){
     int top=node[node_num].connected_nodes;
@@ -72,7 +72,7 @@ void node_connection_nd(int node_num, int node_connect){
     node[node_connect].connect[top].cost=cost_candidates[node_count];
     node[node_connect].connected_nodes+=1;
     connect_node_total+=1;
-}//Checked 2021.01.
+}//Checked 2021.01.11 17.34
 
 void gen_normal_distribution(){
     double avg, sd;
@@ -90,4 +90,4 @@ void gen_normal_distribution(){
         cost_candidates[i]=dist(nd);
         cout << cost_candidates[i] << endl;
     }
-}
+}//Checked 2021.01.11 17.34

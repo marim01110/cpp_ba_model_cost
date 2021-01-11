@@ -5,7 +5,7 @@ using namespace std;
 
 typedef struct connect_t{
     int next_node=-1;
-    long double cost;
+    double cost;
 }_connect;
 
 typedef struct node_t{
@@ -16,7 +16,7 @@ typedef struct node_t{
 
 _node node[NODES]={};
 int route_array[NODES]={}, node_done[NODES]={};
-long double cost_array[NODES]={};
+double cost_array[NODES]={};
 int node_count=0, connect_node_total=0, node_remains=NODES;
 
 void q1(){
@@ -90,15 +90,15 @@ void node_connection(int node_num, int node_connect){
 
 int define_connect_node(){
     int node_sel=0;
-    long double rd_temp;
-    long double priority[node_count]={};
+    double rd_temp;
+    double priority[node_count]={};
 
     for(int i=0;i<node_count;i++){
-        priority[i]=(long double)node[i].connected_nodes/connect_node_total;
+        priority[i]=(double)node[i].connected_nodes/connect_node_total;
     }
 
     mt19937 rd{random_device{}()};
-    uniform_real_distribution<long double> dist(0, 1);
+    uniform_real_distribution<double> dist(0, 1);
     rd_temp=dist(rd);
     #ifdef Debug
     cout << "init rd_temp: " << rd_temp << endl;
@@ -149,7 +149,7 @@ void dijkstra_init(int input, int* x){
 
 void find_node(int from){
     int top=node[from].connected_nodes;
-    long double temp_cost;
+    double temp_cost;
     for(int i=0;i<top;i++){
         temp_cost=node[from].connect[i].cost;
         if((cost_array[node[from].connect[i].next_node] > cost_array[from] + temp_cost) and (cost_array[node[from].connect[i].next_node] > 0)){
@@ -164,7 +164,7 @@ void find_node(int from){
 }//Checked 2021.01.09 21.24
 
 void dijkstra_position_update(int* from){
-    long double min=INF;
+    double min=INF;
 
     for(int i=0;i<NODES;i++){
         if((node_done[i] == UNDONE) and (cost_array[i] > 0)){
