@@ -1,5 +1,5 @@
 #include "q1.cpp"
-#define Debug
+//#define Debug
 using namespace std;
 
 static double cost_candidates[NODES]={};
@@ -21,7 +21,7 @@ void q2(){
     
     //search state
     start_node=decide_start_node();
-    bf_init(start_node, &from);
+    dijkstra_init_nd(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
 
     do{
@@ -41,12 +41,7 @@ void q2(){
             cout << endl;
             break;
         }
-        if(node_remains<0){
-            cout << "閉路を検知しました。" << endl;
-            cout << endl;
-            break;
-        }
-        bf_position_update(&from);
+        dijkstra_position_update_nd(&from);
     }while(true);
 
     print_cost_list();
@@ -90,7 +85,8 @@ void gen_normal_distribution(){
     cin >> avg;
     cout << "正規分布の標準偏差を入力してください。" << endl;
     cin >> sd;
-
+    cout << endl;
+    
     random_device seed_gen;
     default_random_engine nd(seed_gen());
     
@@ -98,11 +94,13 @@ void gen_normal_distribution(){
     
     for(int i=0;i<NODES;i++){
         cost_candidates[i]=dist(nd);
+        #ifdef Debug
         cout << cost_candidates[i] << endl;
+        #endif
     }
 }//Checked 2021.01.11 17.34
 
-void bf_init(int input, int* x){
+void dijkstra_init_nd(int input, int* x){
     //set position to goal node
     *x=input;
 
@@ -114,7 +112,7 @@ void bf_init(int input, int* x){
     cost_array[input]=0;//set cost of start node to zero
 }//checked 2020.01.11 18.10
 
-void bf_position_update(int* from){
+void dijkstra_position_update_nd(int* from){
     double min=INF;
 
     for(int i=0;i<NODES;i++){

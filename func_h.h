@@ -3,7 +3,7 @@
 #include <random>
 
 #define INF 99999
-#define NODES 10
+#define NODES 100
 #define DONE 1
 #define UNDONE -1
 #define YES 1
@@ -29,5 +29,5 @@ int print_route(int start);
 void ba_init_nd();
 void node_connection_nd(int node_num, int node_connect);
 void gen_normal_distribution();
-void bf_init(int input, int* x);
-void bf_position_update(int* from);
+void dijkstra_init_nd(int input, int* x);
+void dijkstra_position_update_nd(int* from);
