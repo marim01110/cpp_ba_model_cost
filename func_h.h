@@ -29,4 +29,5 @@ int print_route(int start);
 void ba_init_nd();
 void node_connection_nd(int node_num, int node_connect);
 void gen_normal_distribution();
-int get_cost();
+void bf_init(int input, int* x);
+void bf_position_update(int* from);

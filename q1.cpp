@@ -4,7 +4,7 @@
 using namespace std;
 
 typedef struct connect_t{
-    int next_node=-1;
+    int next_node=UNDONE;
     double cost;
 }_connect;
 

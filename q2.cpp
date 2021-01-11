@@ -1,11 +1,11 @@
 #include "q1.cpp"
-//#define Debug
+#define Debug
 using namespace std;
 
 static double cost_candidates[NODES]={};
 
 void q2(){
-    int start_node, from, find_status;
+    int start_node, from, find_status, node_dones=0;
 
     gen_normal_distribution();
 
@@ -21,22 +21,32 @@ void q2(){
     
     //search state
     start_node=decide_start_node();
-    dijkstra_init(start_node, &from);
+    bf_init(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
 
     do{
         find_node(from);
         node_done[from]=DONE;
         node_remains-=1;
+        node_dones=0;
+        for(int i=0;i<NODES;i++){
+            if(node_done[i]==DONE) node_dones+=1;
+        }
         #ifdef Debug
-        cout << "node_remains: " << node_remains-1 <<endl;
+        cout << "node_remains: " << node_remains-1 << ", node_dones: " << node_dones << endl;
         #endif
-        if(node_remains==1){
+
+        if(node_dones==NODES-1){
             cout << "全ノードの経路探索が終了しました。" << endl;
             cout << endl;
             break;
         }
-        dijkstra_position_update(&from);
+        if(node_remains<0){
+            cout << "閉路を検知しました。" << endl;
+            cout << endl;
+            break;
+        }
+        bf_position_update(&from);
     }while(true);
 
     print_cost_list();
@@ -91,3 +101,28 @@ void gen_normal_distribution(){
         cout << cost_candidates[i] << endl;
     }
 }//Checked 2021.01.11 17.34
+
+void bf_init(int input, int* x){
+    //set position to goal node
+    *x=input;
+
+    //array init
+    for(int i=0;i<NODES;i++){
+        cost_array[i]=INF;
+        node_done[i]=UNDONE;
+    }
+    cost_array[input]=0;//set cost of start node to zero
+}//checked 2020.01.11 18.10
+
+void bf_position_update(int* from){
+    double min=INF;
+
+    for(int i=0;i<NODES;i++){
+        if(node_done[i] == UNDONE){
+            if(min > cost_array[i]){
+                min=cost_array[i];
+                *from = i;
+            }
+        }
+    }
+}//checked 2021.01.09 21.29
