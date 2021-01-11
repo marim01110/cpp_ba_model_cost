@@ -21,7 +21,7 @@ void q2(){
     
     //search state
     start_node=decide_start_node();
-    dijkstra_init_nd(start_node, &from);
+    dijkstra_init(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
 
     do{
@@ -41,7 +41,7 @@ void q2(){
             cout << endl;
             break;
         }
-        dijkstra_position_update_nd(&from);
+        dijkstra_position_update(&from);
     }while(true);
 
     print_cost_list();
@@ -86,7 +86,7 @@ void gen_normal_distribution(){
     cout << "正規分布の標準偏差を入力してください。" << endl;
     cin >> sd;
     cout << endl;
-    
+
     random_device seed_gen;
     default_random_engine nd(seed_gen());
     
@@ -99,28 +99,3 @@ void gen_normal_distribution(){
         #endif
     }
 }//Checked 2021.01.11 17.34
-
-void dijkstra_init_nd(int input, int* x){
-    //set position to goal node
-    *x=input;
-
-    //array init
-    for(int i=0;i<NODES;i++){
-        cost_array[i]=INF;
-        node_done[i]=UNDONE;
-    }
-    cost_array[input]=0;//set cost of start node to zero
-}//checked 2020.01.11 18.10
-
-void dijkstra_position_update_nd(int* from){
-    double min=INF;
-
-    for(int i=0;i<NODES;i++){
-        if(node_done[i] == UNDONE){
-            if(min > cost_array[i]){
-                min=cost_array[i];
-                *from = i;
-            }
-        }
-    }
-}//checked 2021.01.09 21.29

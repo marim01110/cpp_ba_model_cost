@@ -141,7 +141,7 @@ void dijkstra_init(int input, int* x){
 
     //array init
     for(int i=0;i<NODES;i++){
-        cost_array[i]=UNDONE;
+        cost_array[i]=INF;
         node_done[i]=UNDONE;
     }
     cost_array[input]=0;//set cost of start node to zero
@@ -167,7 +167,7 @@ void dijkstra_position_update(int* from){
     double min=INF;
 
     for(int i=0;i<NODES;i++){
-        if((node_done[i] == UNDONE) and (cost_array[i] > 0)){
+        if(node_done[i] == UNDONE){
             if(min > cost_array[i]){
                 min=cost_array[i];
                 *from = i;

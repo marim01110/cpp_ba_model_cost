@@ -29,5 +29,3 @@ int print_route(int start);
 void ba_init_nd();
 void node_connection_nd(int node_num, int node_connect);
 void gen_normal_distribution();
-void dijkstra_init_nd(int input, int* x);
-void dijkstra_position_update_nd(int* from);
