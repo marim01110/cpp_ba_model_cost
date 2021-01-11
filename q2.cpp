@@ -77,9 +77,9 @@ void node_connection_nd(int node_num, int node_connect){
 void gen_normal_distribution(){
     double avg, sd;
     cout << "正規分布の平均値を入力してください。" << endl;
-    scanf("%d",&avg);
+    scanf("%lf",&avg);
     cout << "正規分布の標準偏差を入力してください。" << endl;
-    scanf("%d",&sd);
+    scanf("%lf",&sd);
 
     random_device seed_gen;
     default_random_engine nd(seed_gen());
