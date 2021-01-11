@@ -21,9 +21,9 @@ void q2(){
     
     //search state
     start_node=decide_start_node();
-    //dijkstra_init(start_node, &from);
+    dijkstra_init(start_node, &from);
     cout << "ノード " << from << " から探索を開始します。" << endl;
-/*
+
     do{
         find_node(from);
         node_done[from]=DONE;
@@ -38,7 +38,7 @@ void q2(){
         }
         dijkstra_position_update(&from);
     }while(true);
-*/
+
     print_cost_list();
     do{
         int error=print_route(start_node);
