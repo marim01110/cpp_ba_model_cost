@@ -26,4 +26,4 @@ int print_route(int start);
 //decide cost
 void ba_init_nd();
 void node_connection_nd(int node_num, int node_connect);
-void gen_normal_distribution();
+int gen_normal_distribution();

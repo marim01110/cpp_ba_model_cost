@@ -5,9 +5,13 @@ using namespace std;
 static double cost_candidates[NODES]={};
 
 void q2(){
-    int start_node, from, find_status, node_dones=0;
+    int start_node, from, find_status, node_dones=0, continue_num;
 
-    gen_normal_distribution();
+    continue_num=gen_normal_distribution();
+    if(continue_num!=YES){
+        cout << "プログラムを終了します。" << endl;
+        exit(-1);
+    }
 
     ba_init_nd();
 
@@ -79,7 +83,9 @@ void node_connection_nd(int node_num, int node_connect){
     connect_node_total+=1;
 }//Checked 2021.01.11 17.34
 
-void gen_normal_distribution(){
+int gen_normal_distribution(){
+    int error=0;
+    char sel;
     double avg, sd;
     cout << "正規分布の平均値を入力してください。" << endl;
     cin >> avg;
@@ -94,8 +100,18 @@ void gen_normal_distribution(){
     
     for(int i=0;i<NODES;i++){
         cost_candidates[i]=dist(nd);
+        if(cost_candidates[i]<0) error+=1;
         #ifdef Debug
         cout << cost_candidates[i] << endl;
         #endif
     }
+    if(error!=0){
+        cout << "負のコストが含まれているため、最短経路が正しくない場合があります。" << endl;
+        cout << "動作を継続しますか？ [y/n]" << endl;
+        cin >> sel;
+        cout << endl;
+        if(sel=='y') return YES;
+        else return NO;
+    }
+    else return YES;
 }//Checked 2021.01.11 17.34
